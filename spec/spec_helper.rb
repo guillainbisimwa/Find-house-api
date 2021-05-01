@@ -1,4 +1,4 @@
-require "shoulda/matchers"
+require 'shoulda/matchers'
 # require "shoulda/matchers/integrations/rspec"
 require 'factory_bot'
 
