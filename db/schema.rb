@@ -16,11 +16,9 @@ ActiveRecord::Schema.define(version: 2021_05_01_134318) do
   enable_extension "plpgsql"
 
   create_table "favourites", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "house_id", null: false
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["house_id"], name: "index_favourites_on_house_id"
     t.index ["user_id"], name: "index_favourites_on_user_id"
   end
 
@@ -43,6 +41,5 @@ ActiveRecord::Schema.define(version: 2021_05_01_134318) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "favourites", "houses"
   add_foreign_key "favourites", "users"
 end
