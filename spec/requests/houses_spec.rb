@@ -44,7 +44,7 @@ RSpec.describe 'Houses', type: :request do
       end
 
       it 'returns a not found message' do
-        expect(response.body).to match(/Couldn't find a House/)
+        expect(response.body).to match(/"message\":\"Couldn't find House with 'id'=#{house_id}/)
       end
     end
   end
@@ -68,7 +68,7 @@ RSpec.describe 'Houses', type: :request do
       end
     end
 
-    # TODO : Add other Validations here
+    # TODO: Add other Validations here
     context 'when the request is invalid' do
       before { post '/houses', params: { about: 'Goma house' } }
 
@@ -78,7 +78,7 @@ RSpec.describe 'Houses', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Validation failed: About can't be blank/)
+          .to match(/"message\":\"Validation failed: Picture can't be blank, Price can't be blank, Owner can't be blank/)
       end
     end
   end
