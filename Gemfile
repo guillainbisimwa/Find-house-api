@@ -20,6 +20,8 @@ gem 'puma', '~> 4.1'
 # gem 'image_processing', '~> 1.2'
 gem 'rubocop', '>= 1.0', '< 2.0'
 
+gem 'api_guard'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
