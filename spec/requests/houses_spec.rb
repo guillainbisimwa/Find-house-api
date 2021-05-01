@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Houses", type: :request do
+RSpec.describe 'Houses', type: :request do
   # initialize test data
   let!(:houses) { create_list(:house, 10) }
   let(:house_id) { houses.first.id }
@@ -52,7 +52,9 @@ RSpec.describe "Houses", type: :request do
   # Test suite for POST /houses
   describe 'POST /houses' do
     # valid payload
-    let(:valid_attributes) { { price: '200', details: 'Luxiry', about: 'Kin house', picture: 'www,gbsismwa.me', owner: '1' } }
+    let(:valid_attributes) do
+      { price: '200', details: 'Luxiry', about: 'Kin house', picture: 'www,gbsismwa.me', owner: '1' }
+    end
 
     context 'when the request is valid' do
       before { post '/houses', params: valid_attributes }
