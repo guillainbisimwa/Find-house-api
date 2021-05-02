@@ -36,94 +36,94 @@ RSpec.describe 'Favourites API', type: :request do
     end
   end
 
-  # # Test suite for GET /users/:user_id/favourites/:id
-  # describe 'GET /users/:user_id/favourites/:id' do
-  #   before { get "/users/#{user_id}/favourites/#{id}" }
+  # Test suite for GET /users/:user_id/favourites/:id
+  describe 'GET /users/:user_id/favourites/:id' do
+    before { get "/users/#{user_id}/favourites/#{id}" }
 
-  #   context 'when user favourite exists' do
-  #     it 'returns status code 200' do
-  #       expect(response).to have_http_status(200)
-  #     end
+    context 'when user favourite exists' do
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
 
-  #     it 'returns the favourite' do
-  #       expect(json['id']).to eq(id)
-  #     end
-  #   end
+      it 'returns the favourite' do
+        expect(json['id']).to eq(id)
+      end
+    end
 
-  #   context 'when user favourite does not exist' do
-  #     let(:id) { 0 }
+    context 'when user favourite does not exist' do
+      let(:id) { 0 }
 
-  #     it 'returns status code 404' do
-  #       expect(response).to have_http_status(404)
-  #     end
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
+      end
 
-  #     it 'returns a not found message' do
-  #       expect(response.body).to match(/Couldn't find Favourites/)
-  #     end
-  #   end
-  # end
+      it 'returns a not found message' do
+        expect(response.body).to match(/Couldn't find Favourite/)
+      end
+    end
+  end
 
-  # # Test suite for POST /users/:user_id/favourites
-  # describe 'POST /users/:user_id/favourites' do
-  #   let(:valid_attributes) { { name: "#{id_house}" } }
+  # Test suite for POST /users/:user_id/favourites
+  describe 'POST /users/:user_id/favourites' do
+    let(:valid_attributes) { { house_id: "#{house_id}" } }
 
-  #   context 'when request attributes are valid' do
-  #     before { post "/users/#{user_id}/favourites", params: valid_attributes }
+    context 'when request attributes are valid' do
+      before { post "/users/#{user_id}/favourites", params: valid_attributes }
 
-  #     it 'returns status code 201' do
-  #       expect(response).to have_http_status(201)
-  #     end
-  #   end
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
+      end
+    end
 
-  #   context 'when an invalid request' do
-  #     before { post "/users/#{user_id}/favourites", params: {} }
+    context 'when an invalid request' do
+      before { post "/users/#{user_id}/favourites", params: {} }
 
-  #     it 'returns status code 422' do
-  #       expect(response).to have_http_status(422)
-  #     end
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
 
-  #     it 'returns a failure message' do
-  #       expect(response.body).to match(/message\":\"Validation failed: House must exist\"/)
-  #     end
-  #   end
-  # end
+      it 'returns a failure message' do
+        expect(response.body).to match(/message\":\"Validation failed: House must exist\"/)
+      end
+    end
+  end
 
-  # # Test suite for PUT /todos/:user_id/favourite/:id
-  # describe 'PUT /todos/:user_id/favourite/:id' do
-  #   let(:valid_attributes) { { name: 'Mozart' } }
+  # Test suite for PUT /users/:user_id/favourites/:id
+  describe 'PUT /users/:user_id/favourites/:id' do
+    let(:valid_attributes) { { house_id: "#{house_id}" } }
 
-  #   before { put "/todos/#{user_id}/favourite/#{id}", params: valid_attributes }
+    before { put "/users/#{user_id}/favourites/#{id}", params: valid_attributes }
 
-  #   context 'when item exists' do
-  #     it 'returns status code 204' do
-  #       expect(response).to have_http_status(204)
-  #     end
+    context 'when favourite exists' do
+      it 'returns status code 204' do
+        expect(response).to have_http_status(204)
+      end
 
-  #     it 'updates the item' do
-  #       updated_item = Item.find(id)
-  #       expect(updated_item.name).to match(/Mozart/)
-  #     end
-  #   end
+      it 'updates the favourite' do
+        updated_favourite = Favourite.find(id)
+        expect(updated_favourite.house_id).to match(house_id)
+      end
+    end
 
-  #   context 'when the item does not exist' do
-  #     let(:id) { 0 }
+    context 'when the favourite does not exist' do
+      let(:id) { 0 }
 
-  #     it 'returns status code 404' do
-  #       expect(response).to have_http_status(404)
-  #     end
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
+      end
 
-  #     it 'returns a not found message' do
-  #       expect(response.body).to match(/Couldn't find Item/)
-  #     end
-  #   end
-  # end
+      it 'returns a not found message' do
+        expect(response.body).to match(/\"message\":\"Couldn't find Favourite/)
+      end
+    end
+  end
 
-  # # Test suite for DELETE /todos/:id
-  # describe 'DELETE /todos/:id' do
-  #   before { delete "/todos/#{user_id}/favourite/#{id}" }
+  # Test suite for DELETE /users/:id
+  describe 'DELETE /users/:id' do
+    before { delete "/users/#{user_id}/favourites/#{id}" }
 
-  #   it 'returns status code 204' do
-  #     expect(response).to have_http_status(204)
-  #   end
-  # end
+    it 'returns status code 204' do
+      expect(response).to have_http_status(204)
+    end
+  end
 end

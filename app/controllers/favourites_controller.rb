@@ -33,7 +33,7 @@ class FavouritesController < ApplicationController
   private
 
   def favourite_params
-    params.permit(:name)
+    params.permit(:house_id)
   end
 
   def set_user
