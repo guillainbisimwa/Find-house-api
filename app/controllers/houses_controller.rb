@@ -1,4 +1,6 @@
 class HousesController < ApplicationController
+  skip_before_action :authorize_request, only: :create
+
   before_action :set_house, only: [:show, :update, :destroy]
 
   # GET /houses
