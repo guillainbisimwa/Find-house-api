@@ -211,6 +211,7 @@ DEPENDENCIES
   database_cleaner (~> 2.0, >= 2.0.1)
   factory_bot_rails (~> 6.1)
   faker
+  jwt
   listen (~> 3.2)
   pg (~> 1.2, >= 1.2.3)
   puma (~> 4.1)
