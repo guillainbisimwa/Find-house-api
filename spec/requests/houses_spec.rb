@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Houses', type: :request do
   # initialize test data
   let!(:houses) { create_list(:house, 10) }
+  let(:user) { create(:user) }
+
   let(:house_id) { houses.first.id }
 
   # authorize request
@@ -109,7 +111,7 @@ RSpec.describe 'Houses', type: :request do
 
   # Test suite for DELETE /houses/:id
   describe 'DELETE /houses/:id' do
-    before { delete "/houses/#{house_id}", headers: headers }
+    before { delete "/houses/#{house_id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

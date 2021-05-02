@@ -8,10 +8,12 @@ RSpec.describe 'Favourites API', type: :request do
   let(:id) { favourites.first.id }
   let!(:user_id) { user.id }
   let(:house_id) { house.id }
+  let(:headers) { valid_headers }
+
 
   # Test suite for GET /users/:user_id/favourite
   describe 'GET /users/:user_id/favourites' do
-    before { get "/users/#{user_id}/favourites" }
+    before { get "/users/#{user_id}/favourites", params: {}, headers: headers }
 
     context 'when user exists' do
       it 'returns status code 200' do
@@ -38,7 +40,7 @@ RSpec.describe 'Favourites API', type: :request do
 
   # Test suite for GET /users/:user_id/favourites/:id
   describe 'GET /users/:user_id/favourites/:id' do
-    before { get "/users/#{user_id}/favourites/#{id}" }
+    before { get "/users/#{user_id}/favourites/#{id}", params: {}, headers: headers }
 
     context 'when user favourite exists' do
       it 'returns status code 200' do
@@ -65,10 +67,10 @@ RSpec.describe 'Favourites API', type: :request do
 
   # Test suite for POST /users/:user_id/favourites
   describe 'POST /users/:user_id/favourites' do
-    let(:valid_attributes) { { house_id: "#{house_id}" } }
+    let(:valid_attributes) { { house_id: "#{house_id}" }.to_json }
 
     context 'when request attributes are valid' do
-      before { post "/users/#{user_id}/favourites", params: valid_attributes }
+      before { post "/users/#{user_id}/favourites", params: valid_attributes, headers: headers }
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
@@ -76,7 +78,7 @@ RSpec.describe 'Favourites API', type: :request do
     end
 
     context 'when an invalid request' do
-      before { post "/users/#{user_id}/favourites", params: {} }
+      before { post "/users/#{user_id}/favourites", params: {}, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -90,9 +92,9 @@ RSpec.describe 'Favourites API', type: :request do
 
   # Test suite for PUT /users/:user_id/favourites/:id
   describe 'PUT /users/:user_id/favourites/:id' do
-    let(:valid_attributes) { { house_id: "#{house_id}" } }
+    let(:valid_attributes) { { house_id: "#{house_id}" }.to_json }
 
-    before { put "/users/#{user_id}/favourites/#{id}", params: valid_attributes }
+    before { put "/users/#{user_id}/favourites/#{id}", params: valid_attributes, headers: headers }
 
     context 'when favourite exists' do
       it 'returns status code 204' do
@@ -120,7 +122,7 @@ RSpec.describe 'Favourites API', type: :request do
 
   # Test suite for DELETE /users/:id
   describe 'DELETE /users/:id' do
-    before { delete "/users/#{user_id}/favourites/#{id}" }
+    before { delete "/users/#{user_id}/favourites/#{id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
