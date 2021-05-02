@@ -11,7 +11,8 @@ class HousesController < ApplicationController
 
   # POST /houses
   def create
-    @house = House.create!(house_params)
+    # create todos belonging to current user
+    @house = current_user.houses.create!(house_params)
     json_response(@house, :created)
   end
 

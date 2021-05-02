@@ -5,10 +5,16 @@ RSpec.describe 'Houses', type: :request do
   let!(:houses) { create_list(:house, 10) }
   let(:house_id) { houses.first.id }
 
+  # authorize request
+  let(:headers) { valid_headers }
+
+
   # Test suite for GET /houses
   describe 'GET /houses' do
+    # update request with headers
+    before { get '/houses', params: {}, headers: headers }
     # make HTTP get request before each example
-    before { get '/houses' }
+    # before { get '/houses' }
 
     it 'returns houses' do
       # Note `json` is a custom helper to parse JSON responses
@@ -23,7 +29,8 @@ RSpec.describe 'Houses', type: :request do
 
   # Test suite for GET /houses/:id
   describe 'GET /houses/:id' do
-    before { get "/houses/#{house_id}" }
+    before { get "/houses/#{house_id}", params: {}, headers: headers }
+    # before { get "/houses/#{house_id}" }
 
     context 'when the record exists' do
       it 'returns the house' do
@@ -53,11 +60,11 @@ RSpec.describe 'Houses', type: :request do
   describe 'POST /houses' do
     # valid payload
     let(:valid_attributes) do
-      { price: '200', details: 'Luxiry', about: 'Kin house', picture: 'www,gbsismwa.me', owner: '1' }
+      { price: '200', details: 'Luxiry', about: 'Kin house', picture: 'www,gbsismwa.me', owner: '1' }.to_json
     end
 
     context 'when the request is valid' do
-      before { post '/houses', params: valid_attributes }
+      before { post '/houses', params: valid_attributes, headers: headers }
 
       it 'creates a house' do
         expect(json['about']).to eq('Kin house')
@@ -70,7 +77,7 @@ RSpec.describe 'Houses', type: :request do
 
     # TODO: Add other Validations here
     context 'when the request is invalid' do
-      before { post '/houses', params: { about: 'Goma house' } }
+      before { post '/houses', params: { about: 'Goma house' }.to_json, headers: headers}
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -85,10 +92,10 @@ RSpec.describe 'Houses', type: :request do
 
   # Test suite for PUT /houses/:id
   describe 'PUT /houses/:id' do
-    let(:valid_attributes) { { about: 'Shopping House' } }
+    let(:valid_attributes) { { about: 'Shopping House' }.to_json }
 
     context 'when the record exists' do
-      before { put "/houses/#{house_id}", params: valid_attributes }
+      before { put "/houses/#{house_id}", params: valid_attributes, headers: headers }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -102,7 +109,7 @@ RSpec.describe 'Houses', type: :request do
 
   # Test suite for DELETE /houses/:id
   describe 'DELETE /houses/:id' do
-    before { delete "/houses/#{house_id}" }
+    before { delete "/houses/#{house_id}", headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
