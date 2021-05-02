@@ -44,7 +44,7 @@ end
 # [...]
 Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 # [...]
-RSpec.configuration do |config|
+RSpec.configure do |config|
   # [...]
   config.include RequestSpecHelper, type: :request
   # [...]

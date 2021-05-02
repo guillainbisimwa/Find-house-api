@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2021_05_01_134318) do
   enable_extension "plpgsql"
 
   create_table "favourites", force: :cascade do |t|
+    t.string "name"
     t.bigint "user_id", null: false
     t.bigint "house_id", null: false
     t.datetime "created_at", precision: 6, null: false

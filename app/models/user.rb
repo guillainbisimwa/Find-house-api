@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   # Model associations
   has_many :favourites
-  has_many :houses, :through => :favourites
+  has_many :houses, through: :favourites
 
   # Validations
   validates_presence_of :name, :email, :password_digest

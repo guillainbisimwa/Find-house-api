@@ -1,23 +1,24 @@
 require 'rails_helper'
 
-RSpec.describe 'Favourites', type: :request do
+RSpec.describe 'Favourites API', type: :request do
   # Initialize the test data
   let!(:user) { create(:user) }
-  let!(:user_id) { user.id }
   let!(:house) { create(:house) }
-  let!(:favourite) { create_list(:favourite, 20, user_id: user.id) }
-  let(:id) { favourite.first.id }
+  let!(:favourites) { create_list(:favourite, 20, house_id: house.id, user_id: user.id) }
+  let(:id) { favourites.first.id }
+  let!(:user_id) { user.id }
+  let(:house_id) { house.id }
 
-  # Test suite for GET /user/:user_id/favourite
-  describe 'GET /user/:user_id/favourite' do
-    before { get "/user/#{user_id}/favourite" }
+  # Test suite for GET /users/:user_id/favourite
+  describe 'GET /users/:user_id/favourites' do
+    before { get "/users/#{user_id}/favourites" }
 
     context 'when user exists' do
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
       end
 
-      it 'returns all user favourite' do
+      it 'returns all user favourites' do
         expect(json.size).to eq(20)
       end
     end
@@ -35,21 +36,21 @@ RSpec.describe 'Favourites', type: :request do
     end
   end
 
-  # # Test suite for GET /todos/:user_id/favourite/:id
-  # describe 'GET /todos/:user_id/favourite/:id' do
-  #   before { get "/todos/#{user_id}/favourite/#{id}" }
+  # # Test suite for GET /users/:user_id/favourites/:id
+  # describe 'GET /users/:user_id/favourites/:id' do
+  #   before { get "/users/#{user_id}/favourites/#{id}" }
 
-  #   context 'when user item exists' do
+  #   context 'when user favourite exists' do
   #     it 'returns status code 200' do
   #       expect(response).to have_http_status(200)
   #     end
 
-  #     it 'returns the item' do
+  #     it 'returns the favourite' do
   #       expect(json['id']).to eq(id)
   #     end
   #   end
 
-  #   context 'when user item does not exist' do
+  #   context 'when user favourite does not exist' do
   #     let(:id) { 0 }
 
   #     it 'returns status code 404' do
@@ -57,17 +58,17 @@ RSpec.describe 'Favourites', type: :request do
   #     end
 
   #     it 'returns a not found message' do
-  #       expect(response.body).to match(/Couldn't find Item/)
+  #       expect(response.body).to match(/Couldn't find Favourites/)
   #     end
   #   end
   # end
 
-  # # Test suite for PUT /todos/:user_id/favourite
-  # describe 'POST /todos/:user_id/favourite' do
-  #   let(:valid_attributes) { { name: 'Visit Narnia', done: false } }
+  # # Test suite for POST /users/:user_id/favourites
+  # describe 'POST /users/:user_id/favourites' do
+  #   let(:valid_attributes) { { name: "#{id_house}" } }
 
   #   context 'when request attributes are valid' do
-  #     before { post "/todos/#{user_id}/favourite", params: valid_attributes }
+  #     before { post "/users/#{user_id}/favourites", params: valid_attributes }
 
   #     it 'returns status code 201' do
   #       expect(response).to have_http_status(201)
@@ -75,14 +76,14 @@ RSpec.describe 'Favourites', type: :request do
   #   end
 
   #   context 'when an invalid request' do
-  #     before { post "/todos/#{user_id}/favourite", params: {} }
+  #     before { post "/users/#{user_id}/favourites", params: {} }
 
   #     it 'returns status code 422' do
   #       expect(response).to have_http_status(422)
   #     end
 
   #     it 'returns a failure message' do
-  #       expect(response.body).to match(/Validation failed: Name can't be blank/)
+  #       expect(response.body).to match(/message\":\"Validation failed: House must exist\"/)
   #     end
   #   end
   # end
