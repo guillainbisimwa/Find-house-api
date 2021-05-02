@@ -2,24 +2,22 @@ require 'rails_helper'
 
 RSpec.describe 'Houses', type: :request do
   # initialize test data
-  let!(:houses) { create_list(:house, 10) }
   let(:user) { create(:user) }
+
+  let!(:houses) { create_list(:house, 10) }
 
   let(:house_id) { houses.first.id }
 
   # authorize request
   let(:headers) { valid_headers }
 
-
   # Test suite for GET /houses
   describe 'GET /houses' do
     # update request with headers
     before { get '/houses', params: {}, headers: headers }
     # make HTTP get request before each example
-    # before { get '/houses' }
 
     it 'returns houses' do
-      # Note `json` is a custom helper to parse JSON responses
       expect(json).not_to be_empty
       expect(json.size).to eq(10)
     end
@@ -53,7 +51,7 @@ RSpec.describe 'Houses', type: :request do
       end
 
       it 'returns a not found message' do
-        expect(response.body).to match(/"message\":\"Couldn't find House with 'id'=#{house_id}/)
+        expect(response.body).to match(/"message":"Couldn't find House with 'id'=#{house_id}/)
       end
     end
   end
@@ -79,7 +77,7 @@ RSpec.describe 'Houses', type: :request do
 
     # TODO: Add other Validations here
     context 'when the request is invalid' do
-      before { post '/houses', params: { about: 'Goma house' }.to_json, headers: headers}
+      before { post '/houses', params: { about: 'Goma house' }.to_json, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -87,7 +85,7 @@ RSpec.describe 'Houses', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/"message\":\"Validation failed: Picture can't be blank, Price can't be blank, Owner can't be blank/)
+          .to match(/"message":"Validation failed: Picture can't be blank, Price can't be blank, Owner can't be blank/)
       end
     end
   end

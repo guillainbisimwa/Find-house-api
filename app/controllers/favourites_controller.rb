@@ -1,6 +1,6 @@
 class FavouritesController < ApplicationController
   before_action :set_user
-  before_action :set_user_favourite, only: [:show, :update, :destroy]
+  before_action :set_user_favourite, only: %i[show update destroy]
 
   # GET /users/:user_id/favourites
   def index

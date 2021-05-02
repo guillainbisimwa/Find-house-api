@@ -10,7 +10,6 @@ RSpec.describe 'Favourites API', type: :request do
   let(:house_id) { house.id }
   let(:headers) { valid_headers }
 
-
   # Test suite for GET /users/:user_id/favourite
   describe 'GET /users/:user_id/favourites' do
     before { get "/users/#{user_id}/favourites", params: {}, headers: headers }
@@ -67,7 +66,7 @@ RSpec.describe 'Favourites API', type: :request do
 
   # Test suite for POST /users/:user_id/favourites
   describe 'POST /users/:user_id/favourites' do
-    let(:valid_attributes) { { house_id: "#{house_id}" }.to_json }
+    let(:valid_attributes) { { house_id: house_id.to_s }.to_json }
 
     context 'when request attributes are valid' do
       before { post "/users/#{user_id}/favourites", params: valid_attributes, headers: headers }
@@ -85,14 +84,14 @@ RSpec.describe 'Favourites API', type: :request do
       end
 
       it 'returns a failure message' do
-        expect(response.body).to match(/message\":\"Validation failed: House must exist\"/)
+        expect(response.body).to match(/message":"Validation failed: House must exist"/)
       end
     end
   end
 
   # Test suite for PUT /users/:user_id/favourites/:id
   describe 'PUT /users/:user_id/favourites/:id' do
-    let(:valid_attributes) { { house_id: "#{house_id}" }.to_json }
+    let(:valid_attributes) { { house_id: house_id.to_s }.to_json }
 
     before { put "/users/#{user_id}/favourites/#{id}", params: valid_attributes, headers: headers }
 
@@ -115,7 +114,7 @@ RSpec.describe 'Favourites API', type: :request do
       end
 
       it 'returns a not found message' do
-        expect(response.body).to match(/\"message\":\"Couldn't find Favourite/)
+        expect(response.body).to match(/"message":"Couldn't find Favourite/)
       end
     end
   end
