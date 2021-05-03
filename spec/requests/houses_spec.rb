@@ -86,7 +86,7 @@ RSpec.describe 'Houses', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/houses', params: { }.to_json, headers: headers }
+      before { post '/houses', params: {}.to_json, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -94,7 +94,7 @@ RSpec.describe 'Houses', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/"message":"Validation failed: Picture can't be blank, About can't be blank, Price can't be blank, Owner can't be blank/)
+          .to match(/Picture can't be blank, About can't be blank, Price can't be blank, Owner can't be blank/)
       end
     end
 
@@ -151,7 +151,7 @@ RSpec.describe 'Houses', type: :request do
     end
 
     context 'when the request is invalid (only Owner is present)' do
-      before { post '/houses', params: { picture: 'url house', price:'299' }.to_json, headers: headers }
+      before { post '/houses', params: { picture: 'url house', price: '299' }.to_json, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -162,8 +162,6 @@ RSpec.describe 'Houses', type: :request do
           .to match(/"message":"Validation failed: About can't be blank, Owner can't be blank/)
       end
     end
-
-
   end
 
   # Test suite for PUT /houses/:id
