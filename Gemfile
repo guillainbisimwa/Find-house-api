@@ -14,11 +14,14 @@ gem 'puma', '~> 4.1'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'rubocop', '>= 1.0', '< 2.0'
+
+gem 'api_guard'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -42,6 +45,7 @@ end
 group :test do
   gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
   gem 'factory_bot_rails', '~> 6.1'
+  gem 'faker'
   gem 'shoulda-matchers', '~> 4.5', '>= 4.5.1'
 end
 
