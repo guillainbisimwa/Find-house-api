@@ -72,8 +72,7 @@ RSpec.describe 'Houses', type: :request do
       end
     end
 
-    # TODO: Add other Validations here
-    context 'when the request is invalid' do
+    context 'when the request is invalid (only About is present)' do
       before { post '/houses', params: { about: 'Goma house' }.to_json, headers: headers }
 
       it 'returns status code 422' do
@@ -85,6 +84,86 @@ RSpec.describe 'Houses', type: :request do
           .to match(/"message":"Validation failed: Picture can't be blank, Price can't be blank, Owner can't be blank/)
       end
     end
+
+    context 'when the request is invalid' do
+      before { post '/houses', params: { }.to_json, headers: headers }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body)
+          .to match(/"message":"Validation failed: Picture can't be blank, About can't be blank, Price can't be blank, Owner can't be blank/)
+      end
+    end
+
+    context 'when the request is invalid (only Picture is present)' do
+      before { post '/houses', params: { picture: 'url house' }.to_json, headers: headers }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body)
+          .to match(/"message":"Validation failed: About can't be blank, Price can't be blank, Owner can't be blank/)
+      end
+    end
+
+    context 'when the request is invalid (only Picture is present)' do
+      before { post '/houses', params: { picture: 'url house' }.to_json, headers: headers }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body)
+          .to match(/"message":"Validation failed: About can't be blank, Price can't be blank, Owner can't be blank/)
+      end
+    end
+
+    context 'when the request is invalid (only Price is present)' do
+      before { post '/houses', params: { price: 'url house' }.to_json, headers: headers }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body)
+          .to match(/"message":"Validation failed: Picture can't be blank, About can't be blank, Owner can't be blank/)
+      end
+    end
+
+    context 'when the request is invalid (only Owner is present)' do
+      before { post '/houses', params: { owner: 'url house' }.to_json, headers: headers }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body)
+          .to match(/"message":"Validation failed: Picture can't be blank, About can't be blank, Price can't be blank/)
+      end
+    end
+
+    context 'when the request is invalid (only Owner is present)' do
+      before { post '/houses', params: { picture: 'url house', price:'299' }.to_json, headers: headers }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body)
+          .to match(/"message":"Validation failed: About can't be blank, Owner can't be blank/)
+      end
+    end
+
+
   end
 
   # Test suite for PUT /houses/:id
