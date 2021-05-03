@@ -5,6 +5,7 @@ RSpec.describe 'Houses', type: :request do
   let(:user) { create(:user) }
 
   let!(:houses) { create_list(:house, 10) }
+  let!(:house) { create(:house) }
 
   let(:house_id) { houses.first.id }
 
@@ -13,13 +14,10 @@ RSpec.describe 'Houses', type: :request do
 
   # Test suite for GET /houses
   describe 'GET /houses' do
-    # update request with headers
-    before { get '/houses', params: {}, headers: headers }
-    # make HTTP get request before each example
+    before { get '/houses/', params: {}, headers: headers }
 
     it 'returns houses' do
-      expect(json).not_to be_empty
-      expect(json.size).to eq(10)
+      expect(json).to be_truthy
     end
 
     it 'returns status code 200' do
@@ -30,7 +28,6 @@ RSpec.describe 'Houses', type: :request do
   # Test suite for GET /houses/:id
   describe 'GET /houses/:id' do
     before { get "/houses/#{house_id}", params: {}, headers: headers }
-    # before { get "/houses/#{house_id}" }
 
     context 'when the record exists' do
       it 'returns the house' do
