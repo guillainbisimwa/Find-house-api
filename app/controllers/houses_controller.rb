@@ -3,7 +3,7 @@ class HousesController < ApplicationController
 
   # GET /houses
   def index
-    @houses = current_user.houses.all
+    @houses = House.all
     json_response(@houses)
   end
 

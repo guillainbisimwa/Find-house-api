@@ -18,6 +18,8 @@ RSpec.describe 'Houses', type: :request do
 
     it 'returns houses' do
       expect(json).to be_truthy
+      expect(json).not_to be_empty
+      expect(json.size).to eq(11)
     end
 
     it 'returns status code 200' do
