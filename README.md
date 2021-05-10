@@ -1,9 +1,3 @@
----
-noteId: "1400ab90b0cb11ebabec2d476e806ed8"
-tags: []
-
----
-
 # Find-house-api
 
 Welcome to the FIND YOUR HOUSE API! You can use our API to access FIND YOUR HOUSE API endpoints, which can get information on various houses in our database.
