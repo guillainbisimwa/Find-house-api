@@ -116,15 +116,6 @@ Finally, run the command to create your database Heroku
 $ heroku run rails db:migrate
 ```
 
-4
-
-here is a fool-proof way to set the secret key base with heroku:
-
-heroku config:set SECRET_KEY_BASE=$(rake secret)
-you can see it with heroku config:get SECRET_KEY_BASE
-
-and check that rails picks it up with Rails.application.secret_key_base (in heroku run rails console for instance)
-
 ## Contributing
 
 This project was created for educational purposes as part of the Microverse web development curriculum; contributing is not accepted.
