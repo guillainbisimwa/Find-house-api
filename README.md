@@ -17,7 +17,7 @@ Welcome to the FIND YOUR HOUSE API! You can use our API to access FIND YOUR HOUS
         <img src="https://img.shields.io/badge/Heroku-published-lightgrey" /></a>
 </p>
 
-<p align="center">    
+<p align="center">
     <br />
     <a href="https://github.com/guillainbisimwa/Find-house-api"><strong>Explore this project »</strong></a>
     <br />
@@ -89,7 +89,7 @@ For the complete documentation, please check my [API Documentation](http://gbisi
 In order to test, just type this command:
 
 ```
-$ bundle exec rspec
+bundle exec rspec
 ```
 
 I configured the RSpec test framework with Factory Bot, Database Cleaner, Shoulda Matchers, and Faker.
@@ -103,17 +103,17 @@ Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
 After that type the command below into your teminal.
 
 ```
-$ heroku create
+heroku create
 ```
 
 ```
-$ git push heroku main
+git push heroku main
 ```
 
 Finally, run the command to create your database Heroku
 
 ```
-$ heroku run rails db:migrate
+heroku run rails db:migrate
 ```
 
 ## Contributing
@@ -143,4 +143,4 @@ This project is [MIT](LICENSE) licensed.
 - [Scotch](https://scotch.io/tutorials/build-a-restful-json-api-with-rails-5-part-two)
 - [Notion](https://www.notion.so/Final-Capstone-Project-Find-Your-House-9a424802e7dc48eb8ef40e2ac09397d1)
 - [Microverse](https://www.microverse.org/)
-- [Creative Commons ](https://creativecommons.org/licenses/by-nc/4.0/)
+- [Creative Commons](https://creativecommons.org/licenses/by-nc/4.0/)
