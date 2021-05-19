@@ -14,9 +14,17 @@ RSpec.describe 'Authentication', type: :request do
         password: user.password
       }.to_json
     end
+
     let(:invalid_credentials) do
       {
         email: Faker::Internet.email,
+        password: Faker::Internet.password
+      }.to_json
+    end
+
+    let(:invalid_email) do
+      {
+        email: 'test@.com',
         password: Faker::Internet.password
       }.to_json
     end
@@ -36,6 +44,15 @@ RSpec.describe 'Authentication', type: :request do
     # returns failure message when request is invalid
     context 'When request is invalid' do
       before { post '/auth/login', params: invalid_credentials, headers: headers }
+
+      it 'returns a failure message' do
+        expect(json['message']).to match(/Invalid credentials/)
+      end
+    end
+
+    # returns failure message when request is invalid
+    context 'When email is invalid' do
+      before { post '/auth/login', params: invalid_email, headers: headers }
 
       it 'returns a failure message' do
         expect(json['message']).to match(/Invalid credentials/)
